@@ -1,0 +1,13 @@
+name: datasets
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - _libgcc_mutex=0.1
+  - _openmp_mutex=5.1
+  - ca-certificates=2026.4.22
+  - libgcc=15.2.0
+  - libgomp=15.2.0
+  - ncbi-datasets-cli=18.25.1
+  - unzip=6.0
+prefix: /home/dolinsek/miniconda3/envs/datasets

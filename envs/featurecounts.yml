@@ -1,0 +1,47 @@
+name: featurecounts
+channels:
+  - defaults
+  - bioconda
+dependencies:
+  - _libgcc_mutex=0.1
+  - _openmp_mutex=5.1
+  - bzip2=1.0.8
+  - c-ares=1.34.6
+  - ca-certificates=2026.5.14
+  - gettext=0.25.1
+  - gettext-tools=0.25.1
+  - htslib=1.21
+  - icu=78.3
+  - jansson=2.15.0
+  - libasprintf=0.25.1
+  - libasprintf-devel=0.25.1
+  - libbrotlicommon=1.2.0
+  - libbrotlidec=1.2.0
+  - libbrotlienc=1.2.0
+  - libcurl=8.20.0
+  - libdeflate=1.22
+  - libev=4.33
+  - libgcc=15.2.0
+  - libgcc-ng=15.2.0
+  - libgettextpo=0.25.1
+  - libgettextpo-devel=0.25.1
+  - libiconv=1.18
+  - libidn2=2.3.8
+  - libkrb5=1.22.2
+  - libnghttp2=1.69.0
+  - libssh2=1.11.1
+  - libstdcxx=15.2.0
+  - libstdcxx-ng=15.2.0
+  - libunistring=1.4.2
+  - libxml2=2.14.6
+  - libzlib=1.3.2
+  - lmdb=0.9.31
+  - lz4-c=1.9.4
+  - ncurses=6.5
+  - openssl=3.5.7
+  - samtools=1.21
+  - subread=2.1.1
+  - xz=5.8.2
+  - zlib=1.3.2
+  - zstd=1.5.7
+prefix: /home/dolinsek/miniconda3/envs/featurecounts

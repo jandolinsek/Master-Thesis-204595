@@ -30,3 +30,5 @@ git push
 git pull --rebase origin main
 git push origin main
 
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/204595

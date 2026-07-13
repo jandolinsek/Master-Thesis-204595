@@ -41,27 +41,6 @@ elif [ $ALGORITHM == "metaspades" ]; then
     BI_FILE=$BASEDIR/06_assembly_metaspades/01_binning/bowtie2/index
     OUT_DIR=$BASEDIR/06_assembly_metaspades/01_binning/bowtie2/bam
 
-elif [ $ALGORITHM == "metaspades_single" ]; then
-
-    echo ""
-    echo " --------- Algorithm confirmed: $ALGORITHM --------- "
-    echo ""
-    
-    ASSEMBLIES_FILE=$BASEDIR/07_assembly_metaspades_single/00_assembly/assembly_single/concatenated/concatenated.fa.gz
-    BI_FILE=$BASEDIR/07_assembly_metaspades_single/01_binning/bowtie2/index
-    OUT_DIR=$BASEDIR/07_assembly_metaspades_single/01_binning/bowtie2/bam
-
-
-elif [ $ALGORITHM == "metaspades_re" ]; then
-
-    echo ""
-    echo " --------- Algorithm confirmed: $ALGORITHM --------- "
-    echo ""
-    
-    ASSEMBLIES_FILE=$BASEDIR/08_skani/01_clusters/cluster_1_combined.fa
-    BI_FILE=$BASEDIR/08_skani/01_clusters/cl1_rebowtie2/index
-    OUT_DIR=$BASEDIR/08_skani/01_clusters/cl1_rebowtie2/bam
-
 else
     echo "Invalid algorithm specified. Use 'megahit' or 'metaspades' or 'metaspades_single'."
     exit 1

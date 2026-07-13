@@ -6,9 +6,6 @@ Created on Wed Jun 24 14:21:23 2026
 
 https://pydeseq2.readthedocs.io/en/stable/auto_examples/plot_minimal_pydeseq2_pipeline.html
 https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.rename.html
-
-
-
 """
 
 import pandas as pd
@@ -187,17 +184,5 @@ plt.savefig(output_file, dpi=600, bbox_inches='tight')
 
 output_file = os.path.join(folder_figures, f'relative_abundance_mgx_{enrichment}.svg')
 plt.savefig(output_file, format='svg', bbox_inches='tight')   
-
-
-
-
-
-
-
-
-
-
-# %%
-
 
 

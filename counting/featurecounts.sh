@@ -13,8 +13,8 @@ DATA_DIR="$3"  # e.g. /home/jan/ms/1_mg/04_qc/trimmomatic_results; positional ar
 THREADS="$4"
 
 BAM_DIR=$DATA_DIR/mapped_reads
-# GFF_DIR=$ASSEMBLY_DIR/06_HQ_MAGs_genomes/annotation
-GFF_DIR=$ASSEMBLY_DIR/07_all_MAGs_genomes/annotation
+GFF_DIR=$ASSEMBLY_DIR/06_HQ_MAGs_genomes/annotation
+# GFF_DIR=$ASSEMBLY_DIR/07_all_MAGs_genomes/annotation
 # OUTDIR=$ASSEMBLY_DIR/06_HQ_MAGs_genomes/feature_counts
 OUTDIR=$BASEDIR/07_MTX/feature_counts
 

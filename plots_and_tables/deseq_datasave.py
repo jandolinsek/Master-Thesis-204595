@@ -12,11 +12,13 @@ import matplotlib.pyplot as plt
 
 # % Calculate relative abundances from the FeatureCounts data
 
-enrichments = ['9_SIM','1_SIE','4_STO']
+# enrichments = ['9_SIM','1_SIE','4_STO']
+enrichments = ['1_SIE']
+
 
 for enrichment in enrichments:
     paths = ['C:', 'C:/Users/dolinsekj', 'C:/Users/jando/OneDrive']
-    path = 0
+    path = 1
     in_deseq_file = f"{paths[path]}/Dropbox/FHWN/M.BDSC.B.23.AA Masterarbeit/MTX/{enrichment}/featurecounts/counts_GCA_976997615.tsvdds_exponential_CN_vs_NH4_resLFC_apeglm.csv"
     in_deseq_path = f"{paths[path]}/Dropbox/FHWN/M.BDSC.B.23.AA Masterarbeit/MTX/{enrichment}/featurecounts/individual/"
     in_fastas = f"{paths[path]}/Master Thesis Share/{enrichment}/genomes/" 
@@ -34,10 +36,14 @@ for enrichment in enrichments:
     
     dirs_indeed = [item for item in dirs_tmp if os.path.isdir(item)]
     
-    genomes_deseq = dict()
     
+    genomes_deseq = dict()
+
+    
+
     for dir_tmp in dirs_indeed:
         
+        dir_tmp = dirs_indeed[0]
         
         files_tmp = os.listdir(dir_tmp)
         
@@ -67,6 +73,9 @@ for enrichment in enrichments:
         functions_list = sorted(list(set(blast_info['function'])))
         
         functions = dict()
+        comparisons = dict()
+        gene_sets = dict()
+        
         i = 0
         
         for function in functions_list:
@@ -121,6 +130,7 @@ for enrichment in enrichments:
         
         for file_dds in files_dds:
             
+            # file_dds = files_dds[-2]
             processing = file_dds.split('/')[-1].replace('.tsv','_').replace('.csv','').replace('counts_','')
         
             dds = pd.read_table(file_dds, sep=',', header=0, index_col=0)
@@ -165,7 +175,7 @@ for enrichment in enrichments:
             
             blast_Geneids = set(all_annotated_expert['Geneid'])
             
-            all_annotated_expert_merged = pd.merge(dds_sorted, blast_annotated, on="Geneid", how="left")
+            all_annotated_expert_merged = pd.merge(all_annotated, blast_annotated, on="Geneid", how="left")
             
             all_annotated_expert_merged_best = (
                 all_annotated_expert_merged.sort_values("pident", ascending=False)
@@ -187,6 +197,9 @@ for enrichment in enrichments:
             all_annotated_expert_merged_best_box = all_annotated_expert_merged_best[all_annotated_expert_merged_best['padj'] < padj_thresh]
             significant_expert_bool=all_annotated_expert_merged_best_box["pident"].notna()
             significant_expert=all_annotated_expert_merged_best_box[significant_expert_bool]
+            
+            all_annotated_top50_assimilation = pd.merge(all_annotated_expert_merged_best, significant_upregulated_assimilation_top50, on="gene_number", how="right")
+            all_annotated_top50_adaptation = pd.merge(all_annotated_expert_merged_best, significant_upregulated_adaptation_top50, on="gene_number", how="right")
            
                
             colors = plt.cm.plasma(np.linspace(0, 1, len(functions)))
@@ -210,13 +223,30 @@ for enrichment in enrichments:
                                                          list(significant_expert['log2FoldChange']),
                                                          list(significant_expert['f_color'])]
                
+            
+            # nan_mask = all_annotated_expert_merged_best['Age'].isna()
+            # all_annotated_expert_merged_best.loc[nan_mask, 'Age'] = all_annotated.loc[nan_mask, 'Age']
+     
+            
+            # comparisons[processing] = all_annotated_expert_merged_best
+            
+            gene_sets['adaptation'] = all_annotated_top50_adaptation
+            gene_sets['assimilation'] = all_annotated_top50_assimilation
+            
+            comparisons[processing] = [all_annotated_expert_merged_best, gene_sets]
 
+           
+            
             genomes_deseq[genome_processed] = [genes_of_interest_significant, 
-                                               significant_upregulated_adaptation_top50,
-                                               significant_upregulated_assimilation_top50,
-                                               all_annotated_expert_merged_best                                           
+                                               # significant_upregulated_adaptation_top50,
+                                               # significant_upregulated_assimilation_top50,
+                                               comparisons                                           
                                                ]
              
       
     with open(f"{in_deseq_path}genomes_deseq.pkl", "wb") as f:
         pickle.dump(genomes_deseq, f)
+        
+        
+        
+

@@ -23,7 +23,6 @@ DATABASE="/home/dolinsek/data/databases/bakta"
 
 COUNTER=1
 
-
 for GENOME in $GENOMES/*.fa; do
     GENOME_NAME=$(basename $GENOME)
     echo "--------------"

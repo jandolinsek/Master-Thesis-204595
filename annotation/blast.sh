@@ -38,25 +38,4 @@ for PROTEINS in $ANNOTATION_DIR/**/*.faa; do
 
 done
 
-# for HYPOTHETICALS in $ANNOTATIONS/**/*hypotheticals.faa; do
-
-#   echo "-------------------"
-#   echo "Translations: $HYPOTHETICALS"
-#   echo "-------------------"
-#   echo "Database: $REF_DB"
-#   echo "-------------------"
-
-
-#   NAME=$(basename "$(dirname "$HYPOTHETICALS")")
-#   blastp -query $HYPOTHETICALS \
-#         -db $REF_DB \
-#         -out $OUTDIR/"${NAME}_hypotheticals_blastp_results.tsv" \
-#         -outfmt '6 qseqid sseqid pident length qlen slen qstart qend sstart send evalue bitscore' \
-#         -evalue 1e-20 \
-#         -max_target_seqs 10 \
-#         -num_threads $THREADS
-
-# done
-
-
 

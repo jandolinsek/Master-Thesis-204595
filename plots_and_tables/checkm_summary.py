@@ -1,12 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jun  9 15:28:15 2026
-
-@author: DolinsekJ
-"""
-
-# -*- coding: utf-8 -*-
-"""
 Created on Mon Jun  8 20:12:13 2026
 
 @author: jando & AI

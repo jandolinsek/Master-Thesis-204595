@@ -1,3 +1,6 @@
+# this script is a modification of the clustermap_triangle.py script, 
+# https://github.com/bluenote-1577/skani/blob/main/scripts/clustermap_triangle.py 
+
 import numpy as np
 from collections import defaultdict
 import matplotlib.pyplot as plt

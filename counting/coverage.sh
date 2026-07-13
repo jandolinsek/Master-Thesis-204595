@@ -37,19 +37,6 @@ elif [ $ALGORITHM == "metaspades" ]; then
     BAMS=$(find $BAM_DIR -name "*.sorted.bam")
     jgi_summarize_bam_contig_depths --outputDepth $COVERAGE_FILE $BAMS 
 
-
-elif [ $ALGORITHM == "metaspades_single" ]; then
-
-    echo ""
-    echo " --------- Algorithm confirmed: $ALGORITHM --------- "
-    echo ""
-
-    ASSEMBLIES_FILE=$BASEDIR/07_assembly_metaspades_single/00_assembly/assembly_single/concatenated/concatenated.fa.gz
-    COVERAGE_FILE=$BASEDIR/07_assembly_metaspades_single/01_binning/bowtie2/coverage/depth_metaspades.txt
-    BAM_DIR=$BASEDIR/07_assembly_metaspades_single/01_binning/bowtie2/bam
-    BAMS=$(find $BAM_DIR -name "*.sorted.bam")
-    jgi_summarize_bam_contig_depths --outputDepth $COVERAGE_FILE $BAMS 
-
 else
     echo "Invalid algorithm specified. Use 'megahit' or 'metaspades'."
     exit 1

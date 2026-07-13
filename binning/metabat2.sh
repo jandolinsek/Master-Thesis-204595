@@ -26,11 +26,6 @@ if [ $ALGORITHM == "megahit" ]; then
     OUT_DIR=$BASEDIR/05_assembly_megahit/01_binning/metabat2/
     OUT_BINS=$BASEDIR/05_assembly_megahit/01_binning/metabat2/bins.txt
 
-    # -l flag provides only contig names, not fastas
-
-    metabat2 -i ${ASSEMBLIES_FILE} -a ${COVERAGE_FILE} -o ${OUT_FASTA} -m 1500 -t $THREADS
-    mv ${OUT_FASTA}.BinInfo.txt ${OUT_DIR}
-
 elif [ $ALGORITHM == "metaspades" ]; then
 
     echo ""
@@ -44,36 +39,14 @@ elif [ $ALGORITHM == "metaspades" ]; then
     OUT_DIR=$BASEDIR/06_assembly_metaspades/01_binning/metabat2/
     # OUT_BINS=$BASEDIR/06_assembly_metaspades/01_binning/metabat2/bins.txt
 
-    # -l flag provides only contig names, not fastas
-
-    metabat2 -i ${ASSEMBLIES_FILE} -a ${COVERAGE_FILE} -o ${OUT_FASTA} -m 1500 -t $THREADS
-    mv ${OUT_FASTA}.BinInfo.txt ${OUT_DIR}
-
-elif [ $ALGORITHM == "metaspades_single" ]; then
-
-    echo ""
-    echo " --------- Algorithm confirmed: $ALGORITHM --------- "
-    echo ""
-
-    ASSEMBLIES_FILE=$BASEDIR/07_assembly_metaspades_single/00_assembly/assembly_single/concatenated/concatenated.fa.gz
-    COVERAGE_FILE=$BASEDIR/07_assembly_metaspades_single/01_binning/bowtie2/coverage/depth_metaspades.txt
-    OUT_FILES=$BASEDIR/07_assembly_metaspades_single/01_binning/metabat2/bins/bin
-    OUT_FASTA=$BASEDIR/07_assembly_metaspades_single/01_binning/metabat2/fasta_bins/bin
-    OUT_DIR=$BASEDIR/07_assembly_metaspades_single/01_binning/metabat2/
-    # OUT_BINS=$BASEDIR/07_assembly_metaspades_single/01_binning/metabat2/bins.txt
-
-    # -l flag provides only contig names, not fastas
-
-    metabat2 -i ${ASSEMBLIES_FILE} -a ${COVERAGE_FILE} -o ${OUT_FASTA} -m 1500 -t $THREADS
-    mv ${OUT_FASTA}.BinInfo.txt ${OUT_DIR}
-
 else
     echo "Invalid algorithm specified. Use 'megahit' or 'metaspades'."
     exit 1
 fi
 
-
-
+# -l flag provides only contig names, not fastas
+metabat2 -i ${ASSEMBLIES_FILE} -a ${COVERAGE_FILE} -o ${OUT_FASTA} -m 1500 -t $THREADS
+mv ${OUT_FASTA}.BinInfo.txt ${OUT_DIR}
 
 # > $OUT_BINS  # empty the output file first
 

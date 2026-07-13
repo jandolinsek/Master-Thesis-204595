@@ -58,7 +58,7 @@ library("IHW")
 
 ```{r read-count-table}
 pc_folders <- c("C:/", "C:/Users/dolinsekj/")
-pc_folder <- 2
+pc_folder <- 1
 
 setwd(paste0(pc_folders[pc_folder], "Dropbox/FHWN/M.BDSC.B.23.AA Masterarbeit/MTX/"))
 
@@ -77,7 +77,7 @@ samples <- c("1_SIE/featurecounts/counts_GCA_976997615.tsv",
              "4_STO/featurecounts/counts_GCA_977004785.tsv",
              "4_STO/featurecounts/counts_GCA_977004805.tsv"
              )
-sample <- 9
+sample <- 1
 
 enrichment <- strsplit(samples[sample], "/")[[1]][1]
 genome <- strsplit(samples[sample], "/")[[1]][3]

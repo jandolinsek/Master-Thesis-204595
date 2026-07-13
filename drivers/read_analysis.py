@@ -29,14 +29,11 @@ scripts_directory = "/home/dolinsek/00_scripts"
 
 # Step 1: Define the paths to the Bash scripts
 
-# Metagenomics
+# Metagenomics:
 get_genomes = os.path.join(scripts_directory, "genome_download.sh")
 genome_dereplication = os.path.join(scripts_directory, "skder.sh")
 genome_checkm = os.path.join(scripts_directory, "checkm_genome.sh")
 read_simulation = os.path.join(scripts_directory, "generate_reads.sh")
-read_QC = os.path.join(scripts_directory, "fastqc.sh")
-read_trimmomatic = os.path.join(scripts_directory, "trimmomatic.sh")
-classify_mOTUs = os.path.join(scripts_directory, "mOTUs.sh")
 reads_subsampling = os.path.join(scripts_directory, "subsampling.sh")
 assembly_prep = os.path.join(scripts_directory, "assembly_prep.sh")
 assembly_prep_subsampled = os.path.join(scripts_directory, "assembly_prep_subsampled.sh")
@@ -54,16 +51,15 @@ annotation_bakta_combined = os.path.join(scripts_directory, "bakta_combined.sh")
 annotation_blast = os.path.join(scripts_directory, "blast.sh")
 phylogeny_gtdbtk = os.path.join(scripts_directory, "gtdbtk.sh")
 phylogeny_gtdbtk_genomes = os.path.join(scripts_directory, "gtdbtk_genomes.sh")
+
+# Metagenomics & Metatranscriptomics:
+read_QC = os.path.join(scripts_directory, "fastqc.sh")
+read_trimmomatic = os.path.join(scripts_directory, "trimmomatic.sh")
 mapping_bbmap = os.path.join(scripts_directory, "bbmap.sh")
-mapping_coverm = os.path.join(scripts_directory, "coverm.sh")
 reannotation_expert = os.path.join(scripts_directory, "reannotation_expert_operator.sh")
 counting_featurecounts = os.path.join(scripts_directory, "featurecounts.sh")
 annotation_blast_rrna = os.path.join(scripts_directory, "blast_rrna.sh")
 retrive_features = os.path.join(scripts_directory, "get_features.sh")
-
-
-# Metatranscriptomics
-MTX_run_merge = os.path.join(scripts_directory, "read_merge.sh")
 
 
 # Step 1.5: Make sure the carriage return characters in the scripts directory match UNIX format
@@ -71,8 +67,8 @@ MTX_run_merge = os.path.join(scripts_directory, "read_merge.sh")
 
 # Step 2: Execute the Bash scripts sequentially
 
-sample_names = ["1", "9", "SO4"]
-# sample_names = ["9"]
+# sample_names = ["1", "9", "SO4"]
+sample_names = ["1"]
 # sample_names = ["9", "SO4"]
 # assembly_algorithms = ["megahit", "metaspades", "metaspades_single"] 
 assembly_algorithms = ["metaspades"] 
@@ -151,7 +147,7 @@ for sample_name in sample_names:
         # run_script(binning_quast, base_directory, assembly_algorithm, threads)
 
         # Run the skani comparison script
-        run_script(comparison_skani, base_directory, assembly_algorithm, threads)
+        # run_script(comparison_skani, base_directory, assembly_algorithm, threads)
 
         # Run the bakta annotation script
         # run_script(annotation_bakta, base_directory, assembly_directory, threads)
@@ -201,14 +197,11 @@ for sample_name in sample_names:
 
 
         # # Run the read quality check script
-        # run_script(read_QC, base_directory, reads_directory, threads)
+        run_script(read_QC, base_directory, reads_directory, threads)
 
         # # Run the trimmomatic script
         # headcrop = 4
         # run_script(read_trimmomatic, reads_directory, headcrop, threads)
-
-        # Run the run merge script
-        # run_script(MTX_run_merge, reads_directory)
 
         # Run the bbmap mapping script
         # run_script(mapping_bbmap, base_directory, assembly_directory, reads_directory, threads)

@@ -1,75 +1,65 @@
 #!/usr/bin/env python3
 
 """
-Description: This script serves creates directories for the metagenomics pipeline. 
+Description: This script creates directories for the MGX & MTX pipeline. 
 
 """
 
 import os
 
-# Define the directory structure for the analysis
 def create_directory_structure(base_dir, data_dir_mgx, data_dir_mtx):
     """
-    Creates a subdirectory structure under the specified base directory.
+    Creates a comprehensive subdirectory structure for data analysis and storage.
     
+    Generates processing and output directories under the base analysis folder, 
+    as well as raw and intermediate read folders inside specific data paths for 
+    both metagenomics (MGX) and metatranscriptomics (MTX).
+
     Args:
-    base_dir (str): The base directory where the subdirectory structure will be created.
-    
-    Directory Structure Analysis Metagenomics:
-    base_dir/
-    ├── 00_scripts/
-    ├── 01_metadata/    
-    ├── 02_genomes/
-    │   ├── individual
-    │   ├── multifasta
-    │   └── dereplicated
-    ├── 04_qc/
-    │   ├── fastqc_results
-    ├── 05_assembly_megahit/
-    │   ├── 01_binning/
-        │   ├── bowtie2
-        │   │   ├── bam
-        │   │   ├── coverage
-        │   │   ├── index    
-        │   ├── metabat2
-        │   │   ├── bins
-        │   │   ├── fasta_bins
-        │   └── checkm
-        │   └── quast
-    │   ├── 02_annotation/
-    │   ├── 03_mapping/
-    │   │   ├── bbmap
-    │   │   ├── coverm
-    │   │   ├── instrain
-    ├── 06_assembly_metaspades/
-    │   ├── 01_binning/
-        │   ├── bowtie2
-        │   │   ├── bam
-        │   │   ├── coverage
-        │   │   ├── index    
-        │   ├── metabat2
-        │   │   ├── bins
-        │   │   ├── fasta_bins
-        │   └── checkm
-        │   └── quast
-    │   ├── 02_annotation/
-    │   ├── 03_mapping/
-    │   │   ├── bbmap
-    │   │   ├── coverm
-    │   │   ├── instrain
-    ├── 09_mOTUs/ 
+        base_dir (str): Path to the base directory where the main analysis 
+            output structure will be initialized.
+        data_dir_mgx (str): Path to the storage directory where MGX short-read 
+            processing directories will be created.
+        data_dir_mtx (str): Path to the storage directory where MTX short-read 
+            processing directories will be created.
 
+    Directory Structure Formatted:
+        
+        Data Storage MGX (data_dir_mgx/):
+        ├── raw_reads/
+        ├── trimmomatic_results/    
+        ├── trimmomatic_results_subsampled/
+        ├── mapped_reads/
+        │   └── links/
+        ├── concatenated_reads/
+        └── concatenated_reads_subsampled/    
 
+        Data Storage MTX (data_dir_mtx/):
+        ├── raw_reads/
+        ├── trimmomatic_results/    
+        └── mapped_reads/
+            └── links/
 
-    Directory Structure Data Metagenomics:
-    base_dir/
-    ├── raw_reads/
-    ├── trimmomatic_results/    
-    ├── trimmomatic_results_subsampled/
-    ├── concatenated_reads/
-    ├── concatenated_reads_subsampled/    
+        Main Analysis Workspace (base_dir/):
+        ├── 02_genomes/
+        │   ├── individual/
+        │   ├── multifasta/
+        │   └── dereplicated/ (checkm, annotation, expert, phylogeny)
+        ├── 04_qc/
+        │   ├── fastqc_results_MGX/
+        │   └── fastqc_results_MTX/
+        ├── 05_assembly_megahit/ & 06_assembly_metaspades/
+        │   ├── 00_assembly/ (subsampled, full, single)
+        │   ├── 01_binning/ (bowtie2, metabat2, semibin2, checkm, quast)
+        │   ├── 02_annotation/
+        │   ├── 03_mapping/ (bbmap, coverm, instrain)
+        │   ├── 04_skani/
+        │   ├── 05_phylogeny/
+        │   └── 06_HQ_MAGs_genomes/ & 07_all_MAGs_genomes/
+        └── 07_MTX/ (genomes, blast_rrna, feature_counts)
 
-   
+    Raises:
+        OSError: If permission is denied or a directory cannot be written.
 
    """
 

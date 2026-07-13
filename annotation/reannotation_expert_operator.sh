@@ -3,9 +3,6 @@
 eval "$(conda shell.bash hook)"
 conda activate biopython
 
-
-
-
 # conda install conda-forge::biopython
 
 # in_fasta = file = sys.argv[1]
